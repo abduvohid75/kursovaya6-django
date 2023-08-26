@@ -1,0 +1,19 @@
+{% extends 'main/base.html' %}
+{% block content %}
+<div class="col-md-6" style="margin-left:220px">
+    <div class="card text-bg-primary mb-3">
+        <div class="card-body">
+            <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ form.as_p }}
+
+                {% if object %}
+                <button type="submit" class="btn btn-primary">Изменить</button>
+                {% else %}
+                <button type="submit" class="btn btn-primary">Создать</button>
+                {% endif %}
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,37 @@
+{% extends 'main/base.html' %}
+{% block content %}
+
+<div class="container">
+<div class="card-deck mb-3 text-center">
+        <div class="card mb-4 box-shadow">
+            <div class="card-header">
+                <h4 class="my-0 font-weight-normal">За все время было сделано</h4>
+            </div>
+            <div class="card-body">
+                <h1 class="card-title pricing-card-title mb-5">... рассылок</h1>
+                <a href="{% url 'main:mails' %}" class="btn btn-block btn-info">Посмотреть расссылки</a>
+            </div>
+        </div>
+        <div class="card mb-4 box-shadow">
+            <div class="card-header">
+                <h4 class="my-0 font-weight-normal">Количество активных рассылок на данный момент</h4>
+            </div>
+            <div class="card-body">
+                <h1 class="card-title pricing-card-title mb-5">...</h1>
+                <a href="{% url 'main:create_mail'%}" class="btn btn-block btn-info">Создать рассылку</a>
+            </div>
+        </div>
+        <div class="card mb-4 box-shadow">
+            <div class="card-header">
+                <h4 class="my-0 font-weight-normal">Кол-во уникальных рассылок для клиента</h4>
+            </div>
+            <div class="card-body">
+                <h1 class="card-title pricing-card-title mb-5">... </h1>
+                <a href="{% url 'main:users' %}" class="btn btn-block btn-info">Посмотреть список всех клиентов</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+

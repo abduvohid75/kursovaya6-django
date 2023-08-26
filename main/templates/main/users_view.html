@@ -1,0 +1,21 @@
+{% extends 'main/base.html' %}
+{% block content %}
+
+<div class="container">
+  {% for object in object_list %}
+<div class="card mb-3">
+  <img src="{{object.avatar.url}}" class="card-img-top" alt="avatar" height="600px">
+  <div class="card-body">
+    <h3 class="card-title">{{object.name}}</h3>
+    <h6 class="card-title">{{object.email}}</h6>
+    <p class="card-text">{{object.comment}}</p>
+    <p class="card-text"><small class="text-body-secondary">Связанные рассылки: {{object.mails_count}}</small></p>
+    <a href="{% url 'main:edit_users' object.pk %}" class="btn btn-lg btn-block btn-outline-primary">Изменить данные клиента</a>
+    <a href="{% url 'main:delete_users' object.pk %}" class="btn btn-danger btn-lg btn-block custom-button">Удалить клиента</a>
+  </div>
+</div>
+    {%endfor%}
+</div>
+
+{% endblock %}
+
