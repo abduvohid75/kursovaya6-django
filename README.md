@@ -1,0 +1,1 @@
+# kursovaya6-django
