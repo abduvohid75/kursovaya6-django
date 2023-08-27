@@ -1,0 +1,48 @@
+{% extends 'main/base.html' %}
+
+{% block content %}
+<div class="container">
+    <div class="card-deck mb-3 text-center">
+        <div class="card mb-4 box-shadow">
+            <div class="card-body">
+                <ul class="list-unstyled mt-3 mb-4">
+                    <b>Пользователю(-ям):  </b>
+                    {% for user in object.users.all %}
+                    <li> {{user}}</li>
+                    {% endfor %}
+                    <b>Тема письма:  </b>
+                    <li>{{ object.theme }}</li>
+                    <b>Текст письма:  </b>
+                    <li>{{ object.body }}</li>
+                    {% if object.scheduled %}
+                    <b>Запланированное время отправки письма:  </b>
+                    <li>{{ object.scheduled }} GMT+0</li>
+                    {% endif %}
+                    {% if object.dynamic_periodic %}
+                    <b>Периодичность:  </b>
+                    <li>Каждые {{ object.dynamic_periodic }} минут</li>
+                    <b>До следующей попытки осталось:  </b>
+                    <li>{{ object.periodic }} минут</li>
+                    <b>Время окончания отправки писем: </b>
+                    <li>{{ object.end }} GMT+0</li>
+                    {% endif %}
+                    <b>Статус:  </b>
+                    <li>{%if object.status %} Завершена {% elif zapusheno %} {{zapusheno}} {% else %} Создана {% endif %}</li>
+                </ul>
+
+                <h3> <b>Логи</b> </h3>
+                <ul class="list-unstyled mt-3 mb-4">
+                    <b>Последняя попытка:  </b>
+                    <li>{% if object.logs.last_time %}{{object.logs.last_time}} GMT+0 {% else %} Нет данных {% endif %}</li>
+                    <b>Статус:  </b>
+                    <li>{% if object.logs.status != None %}{% if object.logs.status %}Успешно {% else %} Ошибка {% endif %} {% else %} Нет данных {% endif %}</li>
+                    <b>Ответ почтового сервера:  </b>
+                    <li>{% if not object.logs.response is None %} {{ object.logs.response}} {% else %} Нет данных {% endif %}</li>
+                <a href="{% url 'main:mails' %}" class="btn btn-lg btn-block btn-outline-primary">Вернуться на главную</a>
+                <a href="{% url 'main:delete_mails' object.pk %}" class="btn btn-danger btn-lg btn-block custom-button">Отменить рассылку</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

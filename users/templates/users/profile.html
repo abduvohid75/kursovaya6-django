@@ -1,0 +1,23 @@
+{% extends 'main/base.html' %}
+{% block content %}
+<div class="col-md-6" style="margin-left:220px">
+    <div align="center" style="margin-bottom: 15px;">
+    {% if not user.is_email_verified %}
+            <h5 style="color:red" align="center">Вы еще не подтвердили свою почту!</h5>
+            <a href="{% url 'users:verify' %}" class="btn btn-success mb-3">Подтвердить</a>
+            {% endif %}
+        </div>
+    <div class="card text-bg-primary mb-3">
+        <div class="card-body">
+            <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+
+                {{form.as_p}}
+
+                <button type="submit" class="btn btn-primary mb-3">Изменить</button>
+            </form>
+            <a href="{% url 'users:logout' %}" class="btn btn-danger mb-3">Выйти из аккаунта</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

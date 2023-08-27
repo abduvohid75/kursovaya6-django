@@ -1,0 +1,15 @@
+{% extends 'main/base.html' %}
+{% block content %}
+<div class="col-md-6" style="margin-left:220px">
+    <div class="card text-bg-primary mb-3">
+        <div class="card-body">
+            <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <p>Подтвердите удаление блога под названием <p style="color:red">"{{ object.title | truncatewords:20 }}"</p></p>
+                <button type="submit" class="btn btn-primary">Подтвердить</button>
+                <a href="{% url 'blogs:blogs' %}" class="btn btn-danger">Отменить</a>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

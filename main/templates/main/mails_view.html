@@ -1,0 +1,30 @@
+{% extends 'main/base.html' %}
+{% block content %}
+
+<div class="container">
+  {% for object in object_list %}
+<div class="card-deck mb-5 text-center">
+        <div class="card mb-4 box-shadow">
+            <div class="card-body">
+                <ul class="list-unstyled mt-3 mb-4">
+                    <li>{{object.subj.email}}</li>
+                    <li>{{object.theme}}</li>
+                    <li>{% if object.status %} Завершена {% else %} Создана {% endif %}</li>
+                </ul>
+                <a href="{% url 'main:detail_mails' object.pk %}" class="btn btn-lg btn-block btn-outline-primary">Подробности</a>
+                {% if user == object.author %}
+                <a href="{% url 'main:edit_mails' object.pk %}" class="btn btn-lg btn-block btn-outline-primary">Изменить рассылку</a>
+                {% endif %}
+                <a href="{% url 'main:delete_mails' object.pk %}" class="btn btn-danger btn-lg btn-block custom-button">Отменить рассылку</a>
+            </div>
+
+        </div>
+    </div>
+    {%endfor%}
+    <div class="mb-5">
+    {% if not is_success %}<a href="{% url 'main:success_mails' %}" class="btn btn-lg btn-block btn-success">Завершенные рассылки</a>{% endif %}
+    </div>
+</div>
+
+{% endblock %}
+

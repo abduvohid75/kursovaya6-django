@@ -1,0 +1,32 @@
+{% extends 'main/base.html' %}
+
+{% block content %}
+<div class="container">
+    <div class="card-deck mb-3 text-center">
+        <div class="card mb-4 box-shadow">
+            <div class="card-body">
+                <h4><b>Аватар:</b></h4>
+              <img class="profile-img" src="{{object.avatar.url}}" alt="User Image" height="200px" width="200px">
+                <ul class="list-unstyled mt-3 mb-4">
+                    <h4><b>Почта:</b></h4>
+                  <li>{{object.email}}</li>
+                    <h4><b>Имя:</b></h4>
+                  <li>{{object.first_name}}</li>
+                    <h4><b>Фамилия:</b></h4>
+                  <li>{{object.last_name}}</li>
+                    <h4><b>Статус верификации:</b></h4>
+                  <li>{{object.is_verified}}</li>
+                    <h4><b>Статус:</b></h4>
+                  <li>{{object.is_blocked}}</li>
+                </ul>
+            </div>
+            {% if not object.is_blocked %}
+            <a href="{% url 'users:block_users' object.pk %}" class="btn btn-danger btn-lg btn-block custom-button">Заблокировать</a>
+            {% else %}
+            <a href="{% url 'users:unblock_users' object.pk %}" class="btn btn-success btn-lg btn-block">Разблокировать</a>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+{% endblock %}
